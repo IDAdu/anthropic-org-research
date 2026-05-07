@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anthropic 的 PM × Research 协作观察 · v25</title>
+<title>Anthropic 的 PM × Research 协作观察 · v26</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
@@ -1383,13 +1383,9 @@
 <!-- 引言 -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <div id="intro" style="margin: 32px 0 12px;">
-  <div style="display: flex; gap: 28px; align-items: flex-start;">
-    <div style="flex: 0 0 340px;">
-      <img src="cover.png" alt="Anthropic" style="width: 100%; border-radius: 8px;">
-    </div>
-    <div style="flex: 1;">
-      <p style="margin:0;">过去 14 个月，Anthropic 的 ARR 从 $1B 涨到 $30B+。2026 年以来，它又连续发布了几十个产品功能。但按公开访谈里的说法，公司 PM 只有几十人，而且内部几乎不靠 PRD 推进。这样一家公司，产品和研究到底是怎么协作的？（左图为七位联创。）</p>
-    </div>
+  <div style="max-width: 520px;">
+    <img src="cover.png" alt="Anthropic" style="width: 100%; border-radius: 8px;">
+    <p style="margin:12px 0 0;">过去 14 个月，Anthropic 的 ARR 从 $1B 涨到 $30B+。2026 年以来，它又连续发布了几十个产品功能。但按公开访谈里的说法，公司 PM 只有几十人，而且内部几乎不靠 PRD 推进。这样一家公司，产品和研究到底是怎么协作的？（图为七位联创。）</p>
   </div>
   <p style="margin:12px 0 0; color:var(--text2);"><strong>研究方法：</strong>信息基于公开信息、Anthropic 官方博客、高管公开各渠道的发言（Lenny's Podcast、Dwarkesh 等）、官方招聘 JD 和权威媒体报道整理。所有引用标注来源编号，完整列表见<a href="#appendix">参考资料</a>。</p>
 </div>
@@ -1497,7 +1493,7 @@
     <text x="220" y="325" font-family="Poppins" font-size="18" font-weight="600" fill="#141413">Mike Krieger 加入，任 CPO</text>
     <text x="220" y="350" font-family="Lora" font-size="16" fill="#87867f">第一位真正意义上的产品组织搭建者</text>
     <text x="220" y="376" font-family="Lora" font-size="16" fill="#5e5d59">前 Instagram 联合创始人 / Artifact 创始人。</text>
-    <text x="220" y="398" font-family="Lora" font-size="16" fill="#5e5d59">上任后开始重组：把产品资源从"公开 API 上搭 UX"转向"PM与Research嵌入式协作"。</text>
+    <text x="220" y="398" font-family="Lora" font-size="16" fill="#5e5d59">上任后重组产品资源：从 API 外层体验，转向更早介入模型训练。</text>
 
     <circle cx="180" cy="500" r="11" fill="#d97757"/>
     <text x="220" y="480" font-family="Poppins" font-size="14" font-weight="600" fill="#d97757" letter-spacing="0.5">2024.08</text>
@@ -1514,7 +1510,7 @@
     <text x="220" y="700" font-family="Poppins" font-size="14" font-weight="600" fill="#c96442" letter-spacing="0.5">2025.06.05</text>
     <text x="220" y="725" font-family="Poppins" font-size="18" font-weight="600" fill="#141413">Mike Krieger 在 Lenny's Podcast 公开方法论</text>
     <text x="220" y="750" font-family="Lora" font-size="16" fill="#87867f">态度仍是"倾向"</text>
-    <text x="220" y="776" font-family="Lora" font-size="16" fill="#5e5d59">"把 PM 嵌进研究团队带来 10 倍影响"——第一次对外讲清这套方法。</text>
+    <text x="220" y="776" font-family="Lora" font-size="16" fill="#5e5d59">第一次对外讲清 PM 嵌入研究的方法。</text>
 
     <circle cx="180" cy="855" r="13" fill="#d97757"/>
     <text x="220" y="835" font-family="Poppins" font-size="14" font-weight="600" fill="#d97757" letter-spacing="0.5">2026.01.13 · 战略落定</text>
@@ -1882,11 +1878,11 @@
   <h3 id="part3-1">3.1 五项机制逐项展开</h3>
 
   <h4 class="accent-h4">前情提要：这套机制是 Mike Krieger 到任后改出来的</h4>
-  <p>2024 年 5 月 Mike Krieger 加入 Anthropic 任 CPO 后，把几乎所有产品资源从"在公开 API 之上做 UX"转向了"和研究团队一起干活"。<span class="fn-ref"><a href="#fn3">[3]</a></span> 同时他保留了 Anthropic 的 bottoms-up 文化：Artifacts 和 MCP 都不是 PM 立项的，而是研究员和工程师自下而上推出来的。</p>
+  <p>这次调整的结果，是产品团队不再只等模型 API 交付，而是更早进入研究和 post-training 环节。<span class="fn-ref"><a href="#fn3">[3]</a></span> 同时 Mike Krieger 保留了 Anthropic 的 bottoms-up 文化：Artifacts 和 MCP 都不是 PM 立项的，而是研究员和工程师自下而上推出来的。</p>
 
   <div class="mech-card">
   <h4>机制一 · PM 直接进研究团队</h4>
-  <p>Mike Krieger："<strong>把 PM 嵌进 AI 研究团队能带来 10 倍的影响。我已经把几乎所有产品资源都从『在公开 API 上搭 UX』转向了和研究团队一起干活。</strong>"<span class="fn-ref"><a href="#fn3" data-tip="Mike Krieger — Lenny's Podcast">[3]</a></span></p>
+  <p>机制一讨论的是 Research PM 的位置变化：PM 从研究链路外部，进入训练决策现场。<span class="fn-ref"><a href="#fn3" data-tip="Mike Krieger — Lenny's Podcast">[3]</a></span></p>
   <p>真正能拉开差距的产品，往往来自对模型能力的深度参与，PM 必须在训练阶段就在场。Anthropic 内部有一个具体角色承接这件事：<strong>Research PM</strong>。Catherine Wu（2024 年 8 月加入，首位 Research PM，前 Princeton CS、Scale AI、Dagster、Index Ventures）是这个角色的样板。她自己搭过 RL 训练环境，这在传统公司里通常不属于 PM 的工作。她解释过：当你需要和研究员讨论"这个能力该训进去吗""需要多少数据"，如果没亲自跑过训练，就只能靠转述。<span class="fn-ref"><a href="#fn5" data-tip="Catherine Wu — Product management on the AI exponential">[5]</a></span></p>
 
   </div>
@@ -2465,7 +2461,7 @@ flowchart LR
 </div>
 
 <footer class="footer">
-  <p>Anthropic 组织研究 v25 · 2026 年 5 月 6 日 · 设计致敬 anthropic.com 视觉风格</p>
+  <p>Anthropic 组织研究 v26 · 2026 年 5 月 6 日 · 设计致敬 anthropic.com 视觉风格</p>
 </footer>
 
 <!-- Scroll-spy for sidebar TOC -->
