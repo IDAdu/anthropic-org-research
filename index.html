@@ -1311,7 +1311,7 @@
 <header class="hero">
   <div class="hero-inner">
     <h1>Anthropic 的 PM × Research 协作观察</h1>
-    <p class="meta">全文约 11,000 字，阅读时间约 20 min &nbsp;&nbsp; · &nbsp;&nbsp; 作者：玥恬 & ClaudeCowork &nbsp;&nbsp; · &nbsp;&nbsp; 2026 年 5 月 5 日 北京</p>
+    <p class="meta">全文约 11,000 字，阅读时间约 20 min &nbsp;&nbsp; · &nbsp;&nbsp; 作者：杜玥恬 &nbsp;&nbsp; · &nbsp;&nbsp; 2026 年 5 月 6 日 北京</p>
   </div>
 </header>
 
@@ -1341,7 +1341,8 @@
         <li><a href="#part2-1">2.1 串行瀑布流：行业默认</a></li>
         <li><a href="#part2-2">2.2 让 PM 嵌入 Research 是怎么实现的</a></li>
         <li><a href="#part2-4">2.3 两种做法的对比</a></li>
-        <li><a href="#part2-5">2.4 新协作方式的双刃剑效应</a></li>
+        <li><a href="#part2-5">2.4 PM 嵌入 Research，实际嵌入的是两层</a></li>
+        <li><a href="#part2-6">2.5 新协作方式的双刃剑效应</a></li>
         </ol>
     </li>
     <li>
@@ -1768,7 +1769,7 @@
 <section class="narrow">
   <h3 id="part2-2">2.2 让 PM 嵌入 Research 是怎么实现的</h3>
   <h4 style="margin-top:18px; color: var(--accent);">两条腿走路的内部实验</h4>
-  <p>2025 年，在 Lenny &amp; Friends Summit 上，Mike Krieger 与 OpenAI CPO Kevin Weil 同台对谈。他提到 Anthropic 内部做过一个分流实验：<strong>一部分 PM 嵌入模型 Research 团队，和研究员一起改进模型本身；另一部分 PM 嵌入产品 / UX 团队，优化交互体验。</strong>结论是，几乎所有 leverage 都来自前者。但当时他还只把这描述成"一个分工倾向"。</p>
+  <p>2025年，Anthropic的CPO Mike Krieger 与 OpenAI 的CPO Kevin Weil 同台对谈。Mike提到 Anthropic 内部做过一个分流实验：一部分 PM 同学，嵌入模型 Research 团队，和研究员一起改进模型本身；另一部分 PM 同学保持产品 / UX 团队，优化交互体验。实验发现，几乎所有的产品价值创造，都来自前者的工作模式。</p>
 
   <div class="phase-label" style="margin-top:24px; font-size: 17px;">一年后，从倾向变成了强推</div>
   <p>Mike Krieger 后来回看这件事时说："25 年 Summit 对谈那时候我没那么确定，现在我极其坚定。"转折点在于一个判定标准变清楚了：</p>
@@ -1854,7 +1855,24 @@
 
 <!-- 2.5 -->
 <section class="narrow">
-  <h3 id="part2-5">2.4 新协作方式的双刃剑效应</h3>
+  <h3 id="part2-5">2.4 PM 嵌入 Research，实际嵌入的是两层</h3>
+  <p>"PM 嵌入 Research"这句话容易被误解成：PM 直接参与模型架构、训练算法或研究路线。更准确地说，PM 进入的是模型能力形成过程中的两个相邻层：<strong>Scaffolding 层</strong>和 <strong>Model Behavior 层</strong>。这不是 Anthropic 官方组织图里的层级，而是理解 PM × Research 更有用的分析切面。</p>
+  <table>
+    <tr><th>层级</th><th>它回答的问题</th><th>PM 和 Research 一起处理什么</th></tr>
+    <tr><td><strong>UX 层</strong></td><td>用户看到什么</td><td>入口、界面、交互、工作流呈现</td></tr>
+    <tr><td><strong>Scaffolding 层</strong></td><td>模型如何在场景里工作</td><td>工具、运行时、状态、任务拆解、Evals、反馈闭环</td></tr>
+    <tr><td><strong>Model Behavior 层</strong></td><td>模型应该形成什么稳定行为</td><td>确认边界、不确定性表达、错误恢复、遵守规范、避免 reward hacking</td></tr>
+  </table>
+  <p>Scaffolding 层是 PM 最直接的主战场。以 Claude Code / Cowork 这类产品为例，问题不只是"做一个开发者工具"或"做一个桌面助手"，而是要定义模型能访问哪些文件和工具、如何读取上下文、如何规划多步任务、如何运行测试或检查结果、如何判断任务完成，以及失败后如何继续。这些都不是传统意义上的 UI，而是把一个真实职业场景装进模型运行时的一套系统。</p>
+  <p>Model Behavior 层则是从这些场景里反推出来的。代码代理、桌面代理和企业工作流都会暴露一批行为问题：模型是否先读上下文再行动，是否在高风险操作前请求确认，失败后能否恢复或解释，是否能区分"我知道"和"我猜测"。这些问题表面上是产品体验，实际上会进入 Evals、tool-use 策略和 post-training 讨论。</p>
+  <div class="highlight-box">
+    <p class="hl-note" style="font-size:14.5px;"><strong>Research PM 的价值，不是把用户需求翻译成 PRD，而是把真实工作场景翻译成模型可运行、可评估、可训练的系统。</strong>先在 Scaffolding 层定义工作环境，再通过 Evals 和用户反馈，把行为缺口推回 Model Behavior 层，这才是"产品和研究坐在一起"真正产生杠杆的地方。</p>
+  </div>
+</section>
+
+<!-- 2.6 -->
+<section class="narrow">
+  <h3 id="part2-6">2.5 新协作方式的双刃剑效应</h3>
   <p>公开访谈里很少直接谈负面，但把几位高管的表述放在一起看，仍然能看到这套打法的几个隐含代价。</p>
   <ul style="margin:0 0 12px 0; padding-left:24px; line-height:1.65; color:var(--text2);">
     <li style="margin-bottom:8px;"><strong>PM 招聘门槛被抬高。</strong>既要懂产品，又要能跟研究员对话（熟悉 post-training、eval、trace 这套语言）。能同时具备的人极少，这本身限制了组织的扩张速度。</li>
@@ -1871,7 +1889,7 @@
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <h2 class="section" id="part3" data-num="Part 03"><span style="color:var(--accent);">PART 03:</span> PM × Research 运作的真实实践</h2>
 
-<p class="narrow part-intro">Part 2 对比了两种路线。Part 3 落回 Anthropic 内部，看它<strong>实际怎么运转</strong>：五项机制逐条拆解、Artifacts 和 Memory 两个案例、PM 和研究员意见冲突时谁拍板、什么样的 PM 才撑得住这套打法。</p>
+<p class="narrow part-intro">Part 2 对比了两种路线，也补了一层 Scaffolding / Model Behavior 的解释框架。Part 3 落回 Anthropic 内部，看它<strong>实际怎么运转</strong>：五项机制逐条拆解、Artifacts 和 Memory 两个案例、PM 和研究员意见冲突时谁拍板、什么样的 PM 才撑得住这套打法。</p>
 
 <!-- 3.1 -->
 <section class="narrow">
@@ -2290,7 +2308,7 @@ flowchart LR
 <!-- 4.3 Anthropic 模式可能遇到的风险 -->
 <h3 id="part6-3" class="narrow">4.3 Anthropic 模式可能遇到的风险</h3>
 
-<p class="narrow sec-intro" style="margin-bottom:24px;">这一节是报告里最没把握的部分。访谈里 Mike Krieger、Catherine Wu、Dario Amodei 给出的多是"我们做对了什么"。但这套打法本身的隐含代价、规模化之后的风险，以及还没解决的张力，公开材料里很少有人展开讲。下面五条是基于访谈细节和常识推导，仅供延伸思考。</p>
+<p class="narrow sec-intro" style="margin-bottom:24px;">访谈里 Mike Krieger、Catherine Wu、Dario Amodei 给出的多是"我们做对了什么"。但这套打法本身的隐含代价、规模化之后的风险，以及还没解决的张力，公开材料里很少有人展开讲。基于访谈内容我们尝试去推演这样的分工方式可能带来的组织风险。</p>
 
 <section class="narrow risk-card">
   <h4 class="accent-h4">风险一 · 这套打法可能高度绑定一类特殊员工</h4>
@@ -2323,7 +2341,7 @@ flowchart LR
 <section class="narrow risk-card">
   <h4 class="accent-h4">风险五 · Labs 内部公司化是否说明主组织开始变重</h4>
   <p>2026 年 1 月 Labs 公司化时，Mike Krieger 离任 CPO，以技术成员身份加入 Labs，由他和 Benjamin Mann 联合负责，直接向 Daniela 汇报。官方解释是"让最快试错的工作脱离正常产品节奏"。</p>
-  <p>但反过来读：如果主产品组织还能像 2024 年那样轻盈试错，为什么还需要 Labs 这个特殊编制？Labs 的存在，某种程度上也说明主组织开始变重。这套打法本身没问题，但<strong>规模带来的协作摩擦增大、不灵活，是任何组织都会遇到的事</strong>。Labs 是 Anthropic 给自己留的一道防线，还不能算最终解。</p>
+  <p>但反过来读：如果主产品组织还能像 2024 年那样轻盈试错，为什么还需要 Labs 这个特殊编制？Labs 的存在，某种程度上也说明主组织开始变重。这套打法本身没问题，但<strong>规模带来的官僚化是任何组织都会遇到的事</strong>。Labs 是 Anthropic 给自己留的一道防线，还不能算最终解。</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -2332,7 +2350,7 @@ flowchart LR
 <h2 class="section" id="conclusion" data-num="结语">写在最后</h2>
 
 <section class="narrow">
-  <p>读到这里相信大家大概也发现了："PM嵌入研究团队"并不是起因，更像是一连串条件共同演化出来的结果。它能成功运行依赖很多基础：足够强的 SOTA 模型、好用的 Claude Code、"Evals 优先"的沟通文化、把训练决策当产品决策的共识、Slack公开辩论的企业文化、综合全能的PM人才画像等等。少一样，PM跟研究员坐得再近也很难聊到一块去。Anthropic这样的AI产品组织协作方式，是否会让他们继续保持目前的领先状态，还是继续交给时间和市场去回答吧。</p>
+  <p>读到这里你大概也发现了："PM 嵌入研究"不是原因，更像是一连串条件共同推出来的结果。它依赖六样东西：足够强的 SOTA 模型、好用的 Claude Code、"Evals 优先"的沟通文化、把训练决策当产品决策的共识、Slack 公开辩论、写代码成本接近零。这六项少一样，PM 跟研究员坐得再近也聊不到一块去。六项到位之后，"嵌入"就变成顺手发生的事。Anthropic 的内部运转讲到这里。它是不是 AI 产品组织的未来形态，交给时间和市场去回答。</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
