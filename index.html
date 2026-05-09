@@ -31,12 +31,33 @@
     overflow-wrap: break-word;
   }
 
-  .main, .narrow {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding: 15px !important;
-    overflow-x: hidden !important;
+.main, .narrow {
+  width: 100% !important;
+  max-width: 100vw !important;
+  padding: 15px 20px !important;  /* 左右各20px留白 */
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* 额外确保所有内容容器都有留白 */
+@media screen and (max-width: 768px) {
+  .main, .narrow, section, .card, .diagram, .appendix {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
+  
+  /* 标题也要有留白 */
+  h1, h2, h3, h4, h5, h6 {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  /* 段落留白 */
+  p {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
 
   @media screen and (max-width: 768px) {
     body { font-size: 16px; }
