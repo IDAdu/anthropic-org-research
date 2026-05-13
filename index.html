@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anthropic 的 PM × Research 协作观察 · v26</title>
+<title>Anthropic 的 PM × Research 协作观察 · v30</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
@@ -32,30 +32,14 @@
   }
 
 .main, .narrow {
-  width: 100% !important;
-  max-width: 100vw !important;
-  padding: 15px 20px !important;  /* 左右各20px留白 */
-  overflow-x: hidden !important;
-  box-sizing: border-box !important;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* 额外确保所有内容容器都有留白 */
 @media screen and (max-width: 768px) {
-  .main, .narrow, section, .card, .diagram, .appendix {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-  
-  /* 标题也要有留白 */
-  h1, h2, h3, h4, h5, h6 {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-  
-  /* 段落留白 */
-  p {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+  .main {
+    padding-left: 7px !important;
+    padding-right: 7px !important;
   }
 }
 
@@ -147,13 +131,30 @@
     text-align: center;
   }
   .hero-inner {
-    max-width: 860px;
+    max-width: 980px;
     margin: 0 auto;
   }
   .hero h1 {
     color: #faf9f5;
     margin-bottom: 14px;
     font-size: 42px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.12em;
+  }
+  .brand-wordmark {
+    display: inline-block;
+    font-family: "Poppins", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #faf9f5;
+    flex: 0 0 auto;
+  }
+  .hero-title-tail {
+    display: inline-block;
   }
   .hero .meta {
     font-family: "Poppins", sans-serif;
@@ -240,6 +241,7 @@
 
   /* ── Main ── */
   .main {
+    grid-column: 2;
     max-width: 880px;
     width: 100%;
     margin: 0;
@@ -648,6 +650,29 @@
   .appendix table { font-size: 13px; }
   .appendix td { font-size: 13px; }
   .appendix td:first-child { font-family: "Poppins", sans-serif; font-weight: 500; color: var(--text); }
+  .appendix .source-table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  .appendix .source-table th:first-child,
+  .appendix .source-table td:first-child {
+    width: 52px;
+    min-width: 52px;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .appendix .source-table th:nth-child(2),
+  .appendix .source-table td:nth-child(2) {
+    width: 58%;
+  }
+  .appendix .source-table th:nth-child(3),
+  .appendix .source-table td:nth-child(3) {
+    width: 32%;
+  }
+  .appendix .source-table a {
+    overflow-wrap: anywhere;
+  }
 
   /* ── Mermaid block ── */
   .mermaid {
@@ -658,6 +683,56 @@
     margin: 24px 0;
     text-align: center;
     font-family: "Poppins", sans-serif !important;
+  }
+
+  /* ── Reader stats ── */
+  .reader-stats {
+    margin: 56px 0 0;
+    padding: 24px 28px !important;
+    background: var(--card);
+    border: 1px solid var(--border-prom);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+  }
+  .reader-stats-label {
+    font-family: "Poppins", sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .reader-stats-main {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: "Poppins", sans-serif;
+  }
+  .reader-stats-number {
+    font-size: 34px;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--accent-dark);
+    letter-spacing: 0;
+  }
+  .reader-stats-unit {
+    font-size: 14px;
+    color: var(--text2);
+  }
+  .reader-stats-note {
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: var(--text3);
+  }
+  .reader-stats-raw {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .reader-stats {
+      padding-left: 7px !important;
+      padding-right: 7px !important;
+    }
   }
 
   /* ── Footer ── */
@@ -674,30 +749,37 @@
 
   /* ─────────── v5 NEW COMPONENTS ─────────── */
 
-  /* ── Sticky sidebar TOC ── */
+  /* ── Fixed sidebar TOC ── */
   .layout {
     display: grid;
-    grid-template-columns: 300px minmax(0, 800px);
-    gap: 160px;
-    max-width: 1360px;
+    grid-template-columns: 300px minmax(0, 880px);
+    gap: clamp(64px, 8vw, 160px);
+    width: 100%;
+    max-width: none;
     margin: 0;
     align-items: start;
-    padding: 0 24px 0 8px;
+    padding: 0 24px 0 0;
     justify-content: start;
   }
   .side-toc {
-    position: sticky;
-    top: 24px;
-    padding: 16px 12px 24px 4px;
+    position: fixed;
+    top: var(--side-toc-top, 209px);
+    left: 0;
+    z-index: 30;
+    width: 300px;
+    padding: 16px 12px 24px 8px;
     font-family: "Poppins", sans-serif;
     font-size: 13px;
-    max-height: calc(100vh - 48px);
+    max-height: calc(100vh - var(--side-toc-top, 0px));
     overflow-y: auto;
+    background: rgba(245, 244, 237, 0.94);
+    backdrop-filter: blur(6px);
+    border-radius: 0 8px 8px 0;
   }
   .toc-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 14px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-prom);
@@ -709,20 +791,6 @@
     color: var(--text3);
     text-transform: uppercase;
   }
-  .pin-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text3);
-    padding: 2px 4px;
-    border-radius: 3px;
-    transition: color 0.15s, background 0.15s;
-    line-height: 0;
-  }
-  .pin-btn:hover { color: var(--accent); background: #fdf6ee; }
-  .pin-btn.pinned { color: var(--accent); }
-  .side-toc.collapsed { opacity: 0.35; transition: opacity 0.3s; }
-  .side-toc.collapsed:hover { opacity: 1; }
   .side-toc ol { list-style: none; padding: 0; }
   .side-toc li { margin-bottom: 6px; line-height: 1.4; }
   .side-toc a {
@@ -864,6 +932,7 @@
   /* ── Responsive ── */
   @media (max-width: 1100px) {
     .layout { grid-template-columns: 1fr; gap: 0; }
+    .main { grid-column: auto; }
     .side-toc { display: none; }
   }
   @media (max-width: 980px) {
@@ -1383,7 +1452,7 @@
 <!-- ═══════════════ HERO ═══════════════ -->
 <header class="hero">
   <div class="hero-inner">
-    <h1>Anthropic 的 PM × Research 协作观察</h1>
+    <h1><span class="brand-wordmark">ANTHROPIC</span><span class="hero-title-tail">的 PM × Research 协作观察</span></h1>
     <p class="meta">全文约 11,000 字，阅读时间约 20 min &nbsp;&nbsp; · &nbsp;&nbsp; BY:恬恬&小云&ClaudeCoworke&Codex &nbsp;&nbsp; · &nbsp;&nbsp; 北京 2026.05</p>
   </div>
 </header>
@@ -1394,9 +1463,6 @@
 <aside class="side-toc" id="side-toc" aria-label="参考资料">
   <div class="toc-header">
     <span class="toc-title">目录</span>
-    <button class="pin-btn pinned" id="pin-btn" title="固定目录" aria-label="固定目录">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="3"/><path d="M5 10l7-7 7 7"/><circle cx="12" cy="20" r="1.5" fill="currentColor" stroke="none"/></svg>
-    </button>
   </div>
   <ol id="sidetoc-list">
 
@@ -1928,17 +1994,17 @@
 <!-- 2.5 -->
 <section class="narrow">
   <h3 id="part2-5">2.4 PM 嵌入 Research，实际嵌入的是两层</h3>
-  <p>"PM 嵌入 Research"这句话容易被误解成：PM 直接参与模型架构、训练算法或研究路线。更准确地说，PM 进入的是模型能力形成过程中的两个相邻层：<strong>Scaffolding 脚手架层</strong>和 <strong>Model Behavior 模型层</strong>。（这不是 Anthropic 官方组织图里的层级，是尝试理解 PM × Research 模式的分析切面。）</p>
+  <p>"PM 嵌入 Research"这句话容易被误解成：PM 直接参与模型架构、训练算法或研究路线。更准确地说，PM 进入的是模型能力形成过程中的两个相邻层：<strong>Harness 脚手架层</strong>和 <strong>Model Behavior 模型层</strong>。（这不是 Anthropic 官方组织图里的层级，是尝试理解 PM × Research 模式的分析切面。）</p>
   <table>
     <tr><th>层级</th><th>它回答的问题</th><th>PM 和 Research 一起处理什么</th></tr>
     <tr><td><strong>UX 层</strong></td><td>用户看到什么、怎么用</td><td>入口、界面、交互、工作流呈现</td></tr>
-    <tr><td><strong>Scaffolding 脚手架层</strong></td><td>模型如何在场景里工作</td><td>工具、运行、记忆、状态、任务拆解、Evals、反馈闭环</td></tr>
+    <tr><td><strong>Harness 脚手架层</strong></td><td>模型如何在场景里工作</td><td>工具、运行、记忆、状态、任务拆解、Evals、反馈闭环</td></tr>
     <tr><td><strong>Model Behavior 层</strong></td><td>模型应该形成什么稳定行为</td><td>确认边界、不确定性表达、错误恢复、遵守规范、避免 reward hacking</td></tr>
   </table>
-  <p>Scaffolding 层是 PM 最直接的主战场。以 Claude Code / Cowork 这类产品为例，问题不只是"做一个开发者工具"或"做一个桌面助手"，而是要定义模型能访问哪些文件和工具、如何读取上下文、如何规划多步任务、如何运行测试或检查结果、如何判断任务完成，以及失败后如何继续。这些都不是传统意义上的 UI，而是把一个真实职业工作场景装进模型运行时的一套系统。</p>
+  <p>Harness 层是 PM 最直接的主战场。以 Claude Code / Cowork 这类产品为例，问题不只是"做一个开发者工具"或"做一个桌面助手"，而是要定义模型能访问哪些文件和工具、如何读取上下文、如何规划多步任务、如何运行测试或检查结果、如何判断任务完成，以及失败后如何继续。这些都不是传统意义上的 UI，而是把一个真实职业工作场景装进模型运行时的一套系统。</p>
   <p>Model Behavior 层则是从这些场景里反推出来的。代码编写、桌面代理和企业工作流实际情况下，都会暴露一批模型行为问题：比如模型是否先读上下文再行动，是否在高风险操作前请求确认，失败后能否恢复或解释，是否能区分"我知道"和"我猜测"等。这些问题表面上是产品体验，实际上会进入 Evals、tool-use 策略和 post-training 讨论。</p>
   <div class="highlight-box">
-    <p class="hl-note" style="font-size:14.5px;"><strong>Research PM 的价值，不是把用户需求翻译成 PRD，而是把真实工作场景翻译成模型可运行、可评估、可训练的系统。</strong>先在 Scaffolding 脚手架层定义工作环境，再通过 Evals 和用户反馈，把行为缺口推回 Model Behavior 层，这才是"产品和研究坐在一起"真正产生杠杆的地方。</p>
+    <p class="hl-note" style="font-size:14.5px;"><strong>Research PM 的价值，不是把用户需求翻译成 PRD，而是把真实工作场景翻译成模型可运行、可评估、可训练的系统。</strong>先在 Harness 脚手架层定义工作环境，再通过 Evals 和用户反馈，把行为缺口推回 Model Behavior 层，这才是"产品和研究坐在一起"真正产生杠杆的地方。</p>
   </div>
 </section>
 
@@ -1948,7 +2014,7 @@
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <h2 class="section" id="part3" data-num="Part 03"><span style="color:var(--accent);">PART 03:</span> PM × Research 运作的真实实践</h2>
 
-<p class="narrow part-intro">Part 2 我们对比了两种路线，也补了一层 Scaffolding / Model Behavior 的解释框架。Part 3 落回到 Anthropic 内部，看它<strong>实际是怎么运转的</strong>：把五项机制逐条拆解、用Artifacts 和 Memory 两个案例、PM 和研究员意见冲突时谁拍板等实际情况，探索什么样的 PM 才能发挥出超高价值。</p>
+<p class="narrow part-intro">Part 2 我们对比了两种路线，也补了一层 Harness / Model Behavior 的解释框架。Part 3 落回到 Anthropic 内部，看它<strong>实际是怎么运转的</strong>：把五项机制逐条拆解、用Artifacts 和 Memory 两个案例、PM 和研究员意见冲突时谁拍板等实际情况，探索什么样的 PM 才能发挥出超高价值。</p>
 
 <!-- 3.1 -->
 <section class="narrow">
@@ -2482,9 +2548,9 @@ flowchart LR
     <tr style="background:#fef6f0;"><td>2026 H2</td><td><span style="color:#b0aea5;font-size:11px;">展望</span></td><td><strong>—</strong></td><td>IPO + 全球化</td><td>东京 · 班加罗尔 · 首尔 · 悉尼</td></tr>
   </table>
 
-  <h3 id="appendix-1">参考资料 B · Anthropic 相关 · 资料来源（[1]-[10]）</h3>
-  <table>
-    <tr><th style="width:24px">#</th><th>来源</th><th>URL</th></tr>
+  <h3 id="appendix-org-compare">参考资料 B · Anthropic 相关 · 资料来源（[1]-[10]、[31]-[32]）</h3>
+  <table class="source-table">
+    <tr><th>#</th><th>来源</th><th>URL</th></tr>
     <tr id="fn1"><td>[1]</td><td>七位联创座谈会"Building Anthropic"</td><td><a href="https://www.coinlive.com/zh/news/seven-co-founders-discussed-how-anthropic-came-about">coinlive.com</a></td></tr>
     <tr id="fn2"><td>[2]</td><td>Observer — The 14 Executives Now Driving Anthropic's Future (2026.04)</td><td><a href="https://observer.com/2026/04/anthropic-top-executives-after-labs-launch/">observer.com</a></td></tr>
     <tr id="fn3"><td>[3]</td><td>Mike Krieger — Lenny's Podcast Ep.268 (2025.06)</td><td><a href="https://www.lennysnewsletter.com/p/anthropics-cpo-heres-what-comes-next">lennysnewsletter.com</a></td></tr>
@@ -2499,9 +2565,9 @@ flowchart LR
     <tr id="fn32"><td>[32]</td><td>NZ Herald — Kiwi Chris Liddell recruited ahead of Anthropic's $630B IPO (2026.01)</td><td><a href="https://www.nzherald.co.nz/business/kiwi-chris-liddell-recruited-by-ai-giant-anthropic-ahead-of-its-630-billion-ipo/QSZXDSRQXJBSLDAKIPEWGBDFEY/">nzherald.co.nz</a></td></tr>
   </table>
 
-<h3 id="appendix-3">参考资料 C · ByteDance / OpenAI / DeepMind / 行业相关（[11]-[22]）</h3>
-  <table>
-    <tr><th style="width:24px">#</th><th>来源</th><th>URL</th></tr>
+<h3 id="appendix-3">参考资料 C · ByteDance / OpenAI / DeepMind / 行业相关（[11]-[30]）</h3>
+  <table class="source-table">
+    <tr><th>#</th><th>来源</th><th>URL</th></tr>
     <tr id="fn11"><td>[11]</td><td>Why Complete Separation Fails in AI — FourWeekMBA</td><td><a href="https://fourweekmba.com/why-complete-separation-fails-in-ai-two-products-no-integration-no-value-transfer/">fourweekmba.com</a></td></tr>
     <tr id="fn12"><td>[12]</td><td>Nalvin — The Future of Product is Integrated</td><td><a href="https://www.nalvin.com/blog/the-future-of-product-is-integrated-why-silos-will-fail">nalvin.com</a></td></tr>
     <tr id="fn13"><td>[13]</td><td>Thoughtworks — Effective machine learning</td><td><a href="https://www.thoughtworks.com/en-au/insights/blog/machine-learning-and-ai/effective-ml-partIII">thoughtworks.com</a></td></tr>
@@ -2514,11 +2580,6 @@ flowchart LR
     <tr id="fn20"><td>[20]</td><td>Beyond Model Power — Redefining AI Competition (2026.04)</td><td><a href="https://phys.sabanciuniv.edu/en/education/graduate">phys.sabanciuniv.edu</a></td></tr>
     <tr id="fn21"><td>[21]</td><td>Business Insider — People 'just argue with Dario' on Slack (2026.04)</td><td><a href="https://www.businessinsider.com/anthropic-open-culture-employees-argue-ceo-dario-amodei-slack-2026-4">businessinsider.com</a></td></tr>
     <tr id="fn22"><td>[22]</td><td>Ken Priore — The move that made AI safety a competitive weapon</td><td><a href="https://kenpriore.com/the-organizational-move-that-made-ai-safety-a-competitive-weapon/">kenpriore.com</a></td></tr>
-  </table>
-
-  
-  <table>
-    <tr><th style="width:24px">#</th><th>来源</th><th>URL</th></tr>
     <tr id="fn23"><td>[23]</td><td>ByteDance Seed 官网（团队介绍 / 招聘 / 研究方向）</td><td><a href="https://seed.ByteDance.com/en/career">seed.ByteDance.com</a></td></tr>
     <tr id="fn24"><td>[24]</td><td>腾讯新闻 — 字节 Seed 架构再调整，朱文佳汇报线下调，转向吴永辉汇报 (2025.10)</td><td><a href="https://news.qq.com/rain/a/20251016A04HB400">news.qq.com</a></td></tr>
     <tr id="fn25"><td>[25]</td><td>知乎独家 — 字节 AI Lab 将全部并入 Seed</td><td><a href="https://zhuanlan.zhihu.com/p/1895819765253134296">zhuanlan.zhihu.com</a></td></tr>
@@ -2532,11 +2593,20 @@ flowchart LR
   <p style="margin-top: 24px; font-size: 14px; color: var(--text3);">共约 30+ 个独立信息来源。Anthropic 部分以 Lenny's Newsletter / 官方播客 / Claude Blog 为主；字节部分以官网 JD、腾讯新闻、华尔街见闻、知乎独家、晚点等中文权威媒体为主。截至 2026 年 4 月 30 日。欢迎针对研究内容展开探讨，邮箱：idadujuan@gmail.com。</p>
 </div>
 
+<section class="reader-stats narrow" aria-label="阅读数据">
+  <div class="reader-stats-label">READING DATA</div>
+  <div class="reader-stats-main" id="busuanzi_container_page_pv">
+    <span class="reader-stats-number" id="reader_count_value">20</span>
+    <span class="reader-stats-raw" id="busuanzi_value_page_pv" aria-hidden="true">0</span>
+    <span class="reader-stats-unit">人次阅读</span>
+  </div>
+</section>
+
 </main>
 </div>
 
 <footer class="footer">
-  <p>Anthropic 组织研究 v26 · 2026 年 5 月 5 日 · 设计致敬 Anthropic.com 视觉风格</p>
+  <p>Anthropic 组织研究 v30 · 2026 年 5 月 5 日 · 设计致敬 Anthropic.com 视觉风格</p>
 </footer>
 
 <!-- Scroll-spy for sidebar TOC -->
@@ -2563,6 +2633,27 @@ flowchart LR
 })();
 </script>
 
+<!-- Sidebar follows the hero, then pins to top -->
+<script>
+(function(){
+  var sideToc = document.getElementById('side-toc');
+  var hero = document.querySelector('.hero');
+  if (!sideToc || !hero) return;
+
+  function updateSideTocTop() {
+    if (window.matchMedia('(max-width: 1100px)').matches) return;
+    var heroBottom = hero.offsetTop + hero.offsetHeight;
+    var top = Math.max(0, heroBottom - window.scrollY);
+    sideToc.style.setProperty('--side-toc-top', top + 'px');
+  }
+
+  window.addEventListener('scroll', updateSideTocTop, {passive:true});
+  window.addEventListener('resize', updateSideTocTop);
+  window.addEventListener('load', updateSideTocTop);
+  updateSideTocTop();
+})();
+</script>
+
 <!-- Mermaid -->
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -2581,32 +2672,6 @@ flowchart LR
     }
   });
 
-  // ── Pin toggle for sidebar ──
-  const pinBtn = document.getElementById('pin-btn');
-  const sideToc = document.getElementById('side-toc');
-  let pinned = true;
-
-  pinBtn.addEventListener('click', function() {
-    pinned = !pinned;
-    if (pinned) {
-      pinBtn.classList.add('pinned');
-      sideToc.classList.remove('collapsed');
-      sideToc.style.position = 'sticky';
-    } else {
-      pinBtn.classList.remove('pinned');
-      sideToc.style.position = 'sticky';
-    }
-  });
-
-  let scrollTimeout;
-  window.addEventListener('scroll', function() {
-    if (pinned) return;
-    clearTimeout(scrollTimeout);
-    sideToc.classList.add('collapsed');
-    scrollTimeout = setTimeout(function() {
-      sideToc.classList.remove('collapsed');
-    }, 1200);
-  });
 </script>
 
 <!-- Lightbox zoom for diagrams -->
@@ -2638,6 +2703,31 @@ flowchart LR
   });
 })();
 </script>
+
+<!-- Reading count -->
+<script>
+(function(){
+  var base = 20;
+  var visible = document.getElementById('reader_count_value');
+  var raw = document.getElementById('busuanzi_value_page_pv');
+  function updateReaderCount() {
+    if (!visible || !raw) return;
+    var parsed = parseInt((raw.textContent || '').replace(/[^\d]/g, ''), 10);
+    var count = Number.isFinite(parsed) ? Math.max(base, base - 1 + parsed) : base;
+    visible.textContent = count.toLocaleString('zh-CN');
+  }
+  updateReaderCount();
+  if (raw && 'MutationObserver' in window) {
+    new MutationObserver(updateReaderCount).observe(raw, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+  }
+  window.addEventListener('load', updateReaderCount);
+})();
+</script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <!-- ========== 图片优化脚本 - 开始 ========== -->
 <script>
