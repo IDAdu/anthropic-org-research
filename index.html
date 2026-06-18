@@ -1523,9 +1523,11 @@
       </ol>
     </li>
     <li>
-      <a href="#part6"><span style="color:var(--accent);">PART 04:</span> 关于 AI 公司组织协作的延伸思考</a>
+      <a href="#part6"><span style="color:var(--accent);">PART 04:</span> 延伸思考，可能遇到的风险</a>
       <ol class="sub">
-        <li><a href="#part6-3">4.1 Anthropic 模式可能遇到的风险</a></li>
+        <li><a href="#part6-1">4.1 高度绑定一类特殊员工</a></li>
+        <li><a href="#part6-2">4.2 Slack 公开辩论文化，在更大规模下可能会退化</a></li>
+        <li><a href="#part6-3">4.3 Labs 内部公司化是否说明主组织开始变重了</a></li>
       </ol>
     </li>
     <li>
@@ -2275,29 +2277,20 @@
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <!-- PART 4: 关于管理的延伸思考 -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
-<h2 class="section" id="part6" data-num="Part 04"><span style="color:var(--accent);">PART 04:</span> 关于 AI 公司组织协作的延伸思考</h2>
+<h2 class="section" id="part6" data-num="Part 04"><span style="color:var(--accent);">PART 04:</span> 延伸思考，可能遇到的风险</h2>
 
 <p class="narrow part-intro">前面三部分拆解了 Anthropic 的产品和研究团队协作机制。下面我们斗胆尝试：推演一下这种工作方式在规模化之后，可能会在哪里出问题。（说明：信息来源公开报道等引用。）</p>
 
-<!-- 4.3 Anthropic 模式可能遇到的风险 -->
-<h3 id="part6-3" class="narrow">4.1 Anthropic 模式可能遇到的风险</h3>
-
 <p class="narrow sec-intro" style="margin-bottom:24px;">访谈里 Mike Krieger、Catherine Wu、Dario Amodei 给出了很多"我们做对了什么"的分享。但这套做法本身是有隐形的代价、规模化之后的风险，以及还没解决的张力，这些在公开材料里很少有人展开讲。</p>
 
-<section class="narrow risk-card">
-  <h4 class="accent-h4">风险一 · 高度绑定一类特殊员工</h4>
+<section class="narrow risk-card" id="part6-1">
+  <h4 class="accent-h4">4.1 高度绑定一类特殊员工</h4>
   <p>招聘成本大大大增加。整个 PM × Research 协作机制对人的要求非常高：要会写代码、要有 model taste、要敢在 Slack 跟 CEO 吵架、要自己搭 RL 环境。类似Catherine Wu 是这种画像的代表，但她的简历不是常态。多年工程师 + 产品 + 短期 VC 经历，刚好踩在三个圈子的交集。</p>
   <p>问题是：当公司从 5,300 人再涨到 1 万、2 万人，能持续招到 50 个 Catherine Wu吗？如果招不到，要么降低标准让普通 PM 进来（机制会被稀释），要么保持标准但接受 PM 数量跟不上业务速度。近期大张旗鼓出来宣传他们的PM模式，是否也侧面说明招聘遇到了困难呢？</p>
 </section>
 
-<section class="narrow risk-card">
-  <h4 class="accent-h4">风险二 · 决策成本的平衡 </h4>
-  <p>"何时下场"的判断成本很高。Mike Krieger 给pm的判定标准是一个反问句："这个东西，任何人拿我们的模型都能做出来吗？"如果能，就不要 Anthropic 自己做；如果不能，而且需要模型本身出现特殊行为，才走 PM × Research 联合路径。“这个判断错一次的代价很大：做错了会浪费稀缺研究算力，没做则可能漏掉差异化机会。</p>
-  <p>另一个冲突点是算力如何分配："每一瓦特拨给客户产品的算力，就是一瓦特从纯研究里抠出来的。"PM 想让模型在某个客户场景上变强，研究员想让模型在通用能力上变强。两边在算力分配、训练数据选择、post-training 优先级上经常冲突。这种情况下Anthropic 的选择不是交给上级拍板，而是把冲突公开化。对人的“坦诚清晰”要求更高了。</p>
-</section>
-  
-<section class="narrow risk-card">
-  <h4 class="accent-h4">风险三 · Slack 公开辩论文化，在更大规模下可能会退化</h4>
+<section class="narrow risk-card" id="part6-2">
+  <h4 class="accent-h4">4.2 Slack 公开辩论文化，在更大规模下可能会退化</h4>
   <p>"员工直接和 Dario Amodei 在 Slack 上争论"这种文化，在 50 人、500 人甚至 2,500 人时是健康的。但当公司到了 10,000 人之后，可能出现两种退化：</p>
   <ul>
     <li>少数 loud voice 在频道里高频发言，普通员工反而更不敢说话，公开辩论变成"几个人的话语权竞赛"</li>
@@ -2306,19 +2299,13 @@
   <p>这两种退化在 GitHub、Stripe 等公司都发生过，他们也都曾以 Slack 公开辩论文化著称。Anthropic 还没到那个临界点，但风险已经能看见。</p>
 </section>
 
-<section class="narrow risk-card">
-  <h4 class="accent-h4">风险四 · Labs 内部公司化是否说明主组织开始变重了</h4>
+<section class="narrow risk-card" id="part6-3">
+  <h4 class="accent-h4">4.3 Labs 内部公司化是否说明主组织开始变重了</h4>
   <p>2026 年 1 月 Labs 公司化时，Mike Krieger 离任 CPO，以技术成员身份加入 Labs，由他和 Benjamin Mann 联合负责，直接向 Daniela 汇报。官方解释是"让最快试错的工作脱离正常产品节奏"。</p>
   <p>但反过来读：如果主产品组织还能像 2024 年那样轻盈试错，为什么还需要 Labs 这个特殊编制？Labs 的存在，某种程度上也说明主组织开始变重。这套打法本身没问题，但<strong>规模带来的官僚化是任何组织都会遇到的事</strong>。Labs 是 Anthropic 给自己留的一道防线，还不能算最终解。</p>
 </section>
 
   
-<section class="narrow risk-card">
-  <h4 class="accent-h4">风险五 · Research Preview 的另一面是用户不满</h4>
-  <p>Research Preview 让 Anthropic 的发布速度快到 1 天，对内部是巨大的杠杆。但站在用户视角，今天用得很顺的功能，下周可能下线、改动，或者收费方式变了。这种节奏对个人开发者还能容忍，对企业客户来说就是结构性问题：部署、合规、培训都需要稳定的产品形态。</p>
-  <p>Anthropic 现在用"主产品 vs Labs / Research Preview"的双轨制部分缓解这件事，但企业客户增长的速度比产品成熟的速度更快，这道矛盾会持续放大。</p>
-</section>
-
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <!-- 结语 -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
